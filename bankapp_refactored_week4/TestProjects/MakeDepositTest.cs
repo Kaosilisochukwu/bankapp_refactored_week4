@@ -18,11 +18,12 @@ namespace bankapp_refactored_week4.TestProjects
         public void CustomerDepositReflectsInAccountBalance()
         {
             Customer go = new Customer("Kaosi", "Nwizu", "Kaosi@maing.guy", "kaosi");
-            var customerAccount = new BankAccount(go, 1200, "savings");
+            var newCustomerAccount = new BankAccount(go, 1200, "savings");
+            var customerAccount = BankAccount.GetBankAccount(newCustomerAccount.AccountNumber);
             decimal customerInitialAccountBalance = customerAccount.AccountBalance;
             decimal depositAmount = 2000;
 
-            customerAccount.MakeDeposite(customerAccount, depositAmount, "Monthly levy");
+            customerAccount.MakeDeposite(customerAccount, depositAmount, "Savings");
             Assert.That(customerAccount.AccountBalance, Is.EqualTo(customerInitialAccountBalance + depositAmount));
         }
 
@@ -42,7 +43,8 @@ namespace bankapp_refactored_week4.TestProjects
         [Test]
         public void AccountMustBeRegisteredToMakeDeposit()
         {
-            BankAccount customerAccount = null;
+            int randomAccountNumber = 1234567890;
+            BankAccount customerAccount = BankAccount.GetBankAccount(randomAccountNumber);
             decimal depositAmount = 2000;
 
             Assert.Throws<NullReferenceException>(

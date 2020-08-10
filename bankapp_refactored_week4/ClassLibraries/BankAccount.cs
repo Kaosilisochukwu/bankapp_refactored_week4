@@ -45,7 +45,7 @@ namespace bankapp_refactored_week4.ClassLibraries
             if (amount < 1)
                 throw new InvalidOperationException("You are trying to deposit an invalid amount");
             if (account == null)
-                throw new NullReferenceException("Customer must have an account to make a deposit");
+                throw new NullReferenceException("Account must exist before a withdrawal will be made");
             AccountBalance += amount;
             BankTransactions transaction = new BankTransactions(account, amount, AccountBalance, note, DateTime.Now);
             AllTransactions.Add(transaction);
@@ -68,9 +68,17 @@ namespace bankapp_refactored_week4.ClassLibraries
                 Console.WriteLine($"{customer.CustomerId}\t {customer.FirstName}\t {customer.LastName}\t {customer.Email}");
             }
         }
+
         //TO MAKE WITHDRAWAL
         public void MakeWithdrawal(BankAccount account, decimal amount, string note)
         {
+            decimal maximumWithdrawalLimit = account.AccountType == "savings" ? account.AccountBalance - 100 : account.AccountBalance;
+            if (amount > maximumWithdrawalLimit)
+                throw new InvalidOperationException($"You cannot withdraw more than {maximumWithdrawalLimit}");
+            if (amount < 1)
+                throw new InvalidOperationException("You cannot withdraw an amount less than 1");
+            if (account == null)
+                throw new NullReferenceException("Account must exist before a withdrawal will be made");
             AccountBalance -= amount;
             BankTransactions transaction = new BankTransactions(account, -amount, AccountBalance, note, DateTime.Now);
             AllTransactions.Add(transaction);
