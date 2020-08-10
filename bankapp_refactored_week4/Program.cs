@@ -8,6 +8,7 @@ namespace bankapp_refactored_week4
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(BankAccount.GetAllAccounts());
             BankController.RunBank();
             BankAccount.GetAllAccounts();
             BankAccount.GetAllCustomers();

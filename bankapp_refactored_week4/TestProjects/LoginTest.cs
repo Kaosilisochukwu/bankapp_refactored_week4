@@ -15,8 +15,8 @@ namespace bankapp_refactored_week4.TestProjects
         {
         }
 
-        Customer go = new Customer("Kaosi", "Nwizu", "Kaosi@maing.guy", "kaosi");
-        Customer guy = new Customer("Deola", "Idowu", "Idowu@maing.guy", "idowu");
+        Customer Kaosi = new Customer("Kaosi", "Nwizu", "Kaosi@maing.guy", "kaosi");
+        Customer Deola = new Customer("Deola", "Idowu", "Idowu@maing.guy", "idowu");
 
 
         [Test]
@@ -36,7 +36,7 @@ namespace bankapp_refactored_week4.TestProjects
         [Test]
         public void WhenACustormerExistsButIsNotLoggedIn()
         {
-            Assert.That(guy.IsLoggedIn, Is.EqualTo(false));
+            Assert.That(Deola.IsLoggedIn, Is.EqualTo(false));
         }
     }
     

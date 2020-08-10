@@ -52,22 +52,24 @@ namespace bankapp_refactored_week4.ClassLibraries
             AllTransactions.Add(transaction);
 
         }
-        public static void GetAllAccounts()
+        public static int GetAllAccounts()
         {
             foreach (var transction in AllBankAccounts)
             {
                 Console.WriteLine($"{transction.AccountType}\t {transction.AccountNumber}\t {transction.CustomerName}\t {transction.AccountBalance} ");
 
             }
+            return AllBankAccounts.Count;
         }
 
         //TO PRING ALL CUSTOMERS TO THE CONSOLE
-        public static void GetAllCustomers()
+        public static int GetAllCustomers()
         {
             foreach (var customer in AllCustomers)
             {
                 Console.WriteLine($"{customer.CustomerId}\t {customer.FirstName}\t {customer.LastName}\t {customer.Email}");
             }
+            return AllCustomers.Count;
         }
 
         //TO MAKE WITHDRAWAL
