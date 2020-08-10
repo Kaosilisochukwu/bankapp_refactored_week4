@@ -24,5 +24,6 @@ namespace bankapp_refactored_week4.ClassLibraries
         public string Note { get; }
         public DateTime Date { get; }
         public decimal AccountBalance { get; set; }
+
     }
 }

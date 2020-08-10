@@ -32,7 +32,7 @@ namespace bankapp_refactored_week4.ClassLibraries
         public int AccountNumber { get; }
         public int CustomerId { get; }
 
-        private List<BankTransactions> AllTransactions = new List<BankTransactions>();
+        public static List<BankTransactions> AllTransactions = new List<BankTransactions>();
 
         private static List<BankAccount> AllBankAccounts = new List<BankAccount>();
 
@@ -103,15 +103,18 @@ namespace bankapp_refactored_week4.ClassLibraries
             }
         }
         //TO GET CUSTOMER TRANSACTION DETAILS
-        public void GetTransactionDetails(int customerAccountNumber)
+        public int GetTransactionDetails(int customerAccountNumber)
         {
+            int numberOfTransactions = 0;
             foreach (var transction in AllTransactions)
             {
                 if (transction.AccountNumber == customerAccountNumber)
                 {
+                    numberOfTransactions += 1;
                     Console.WriteLine($"{transction.AccountType}\t {transction.AccountNumber}\t {transction.CustomerFullName}\t {transction.Amount}\t {transction.Note}\t {transction.Date} ");
                 }
             }
+            return numberOfTransactions;
         }
         public void GetAccountBalance()
         {
