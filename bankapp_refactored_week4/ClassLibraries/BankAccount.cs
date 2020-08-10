@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace bankapp_refactored_week4.ClassLibraries
@@ -22,7 +23,7 @@ namespace bankapp_refactored_week4.ClassLibraries
             accountNumber += 123;
             AllBankAccounts.Add(this);
             AllCustomers.Add(customer);
-            MakeDeposite(this, initialDeposit, "initial Deposit");
+            MakeDeposit(this, initialDeposit, "initial Deposit");
         }
 
         public string CustomerName { get; set; }
@@ -40,7 +41,7 @@ namespace bankapp_refactored_week4.ClassLibraries
 
         public static BankAccount RegisterAccount(Customer customer, decimal initialDeposit, string accountType) =>
             new BankAccount(customer, initialDeposit, accountType);
-        public void MakeDeposite(BankAccount account, decimal amount, string note)
+        public void MakeDeposit(BankAccount account, decimal amount, string note)
         {
             if (amount < 1)
                 throw new InvalidOperationException("You are trying to deposit an invalid amount");
@@ -84,14 +85,16 @@ namespace bankapp_refactored_week4.ClassLibraries
             AllTransactions.Add(transaction);
         }
         //TO TRANSFER FUNDS FROM ONE ACCOUNT TO ANOTHER
-        public void TransferFunds(BankAccount recipient, decimal amount, DateTime date, string note)
+        public void TransferFunds(BankAccount recipient, decimal amount, string note)
         {
             foreach (var account in AllBankAccounts)
             {
                 if (account.AccountNumber == recipient.AccountNumber)
                 {
                     MakeWithdrawal(this, amount, note);
-                    recipient.MakeDeposite(recipient, amount, note);
+                    if (this.AccountNumber == recipient.AccountNumber)
+                        throw new InvalidExpressionException("You cannot transfer to the same account");
+                    recipient.MakeDeposit(recipient, amount, note);
                     Console.WriteLine($"You have successfully transfered {amount} to {recipient.CustomerName}\n\t\tAccount balance: {AccountBalance}");
                     break;
                 }

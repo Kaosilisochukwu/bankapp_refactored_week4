@@ -216,7 +216,7 @@ namespace bankapp_refactored_week4.HelperClasses
                             goto TranferPoint;
                         }
                         BankAccount receiverBankAccount = BankAccount.GetBankAccount(int.Parse(receiverBankAccountString));
-                        benefactorBankAccount.TransferFunds(receiverBankAccount, withdrawalAmount, DateTime.Now, note);
+                        benefactorBankAccount.TransferFunds(receiverBankAccount, withdrawalAmount, note);
                         Console.WriteLine($"Transaction successful");
                         Console.WriteLine($"You now have {benefactorBankAccount.AccountBalance} in your {benefactorBankAccount.AccountNumber} account.");
                         Console.WriteLine("*************************************************");

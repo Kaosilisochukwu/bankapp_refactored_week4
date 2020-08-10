@@ -23,7 +23,7 @@ namespace bankapp_refactored_week4.TestProjects
             decimal customerInitialAccountBalance = customerAccount.AccountBalance;
             decimal depositAmount = 2000;
 
-            customerAccount.MakeDeposite(customerAccount, depositAmount, "Savings");
+            customerAccount.MakeDeposit(customerAccount, depositAmount, "Savings");
             Assert.That(customerAccount.AccountBalance, Is.EqualTo(customerInitialAccountBalance + depositAmount));
         }
 
@@ -36,7 +36,7 @@ namespace bankapp_refactored_week4.TestProjects
             decimal depositAmount = 0;
 
             Assert.Throws<InvalidOperationException>(
-                        () => customerAccount.MakeDeposite(customerAccount, depositAmount, "School fees")
+                        () => customerAccount.MakeDeposit(customerAccount, depositAmount, "School fees")
                         );
         }
 
@@ -48,7 +48,7 @@ namespace bankapp_refactored_week4.TestProjects
             decimal depositAmount = 2000;
 
             Assert.Throws<NullReferenceException>(
-                        () => customerAccount.MakeDeposite(customerAccount, depositAmount, "School fees")
+                        () => customerAccount.TransferFunds(customerAccount, depositAmount, "School fees")
                         );
         }
 

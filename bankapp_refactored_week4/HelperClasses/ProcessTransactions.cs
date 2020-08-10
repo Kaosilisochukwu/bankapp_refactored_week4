@@ -33,7 +33,7 @@ namespace bankapp_refactored_week4.HelperClasses
                 BankAccount customerBankAccount = BankAccount.GetBankAccount(int.Parse(bankAccountString));
                 Console.WriteLine("Please enter a note for this transaction");
                 string note = Console.ReadLine();
-                customerBankAccount.MakeDeposite(customerBankAccount, depositAmount, note);
+                customerBankAccount.TransferFunds(customerBankAccount, depositAmount, note);
                 Console.WriteLine($"Transaction successful");
                 Console.WriteLine($"You now have {customerBankAccount.AccountBalance} in your {customerBankAccount.AccountNumber} account.");
                 Console.WriteLine("*************************************************");
