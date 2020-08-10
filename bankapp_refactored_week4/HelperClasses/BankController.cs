@@ -113,7 +113,7 @@ namespace bankapp_refactored_week4.HelperClasses
                         goto InitialDeposit;
                     }
 
-                    BankAccount newAccount = new BankAccount(currentCustomer, initalDeposit, accountType);
+                    BankAccount newAccount =  BankAccount.RegisterAccount(currentCustomer, initalDeposit, accountType);
                     Console.WriteLine($"A {newAccount.AccountType} account has been created for {newAccount.CustomerName} with an initial deposite of {newAccount.AccountBalance}\n\t\tAccount number: {newAccount.AccountNumber}");
                     Console.WriteLine("Do you want to perform another transaction?");
                     goto ActionCenter;

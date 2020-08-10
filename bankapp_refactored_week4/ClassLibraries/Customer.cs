@@ -43,7 +43,6 @@ namespace bankapp_refactored_week4.ClassLibraries
             return customerExist;
         }
 
-
         //TO RETURN A REGISTERED CUSTOMERS
         public static Customer GetCurrentCustomer(string password, string email)
         {

@@ -9,6 +9,12 @@ namespace bankapp_refactored_week4.ClassLibraries
         private static int accountNumber = 1058848950;
         public BankAccount(Customer customer, decimal initialDeposit, string accountType)
         {
+            if (accountType == "savings" && initialDeposit < 100)
+                throw new Exception("Initial deposit Amount must be greater that or equal to 100 for Savings Account");
+            if (accountType == "current" && initialDeposit < 1000)
+                throw new Exception("Initial deposit amount must be greater than or equal to 1000 for current Account");
+            if (accountType != "savings" && accountType != "current")
+                throw new Exception("Account Type must be either current or savings");
             CustomerName = $"{customer.FirstName} {customer.LastName}";
             AccountType = accountType;
             AccountNumber = accountNumber;
@@ -30,10 +36,16 @@ namespace bankapp_refactored_week4.ClassLibraries
         private static List<BankAccount> AllBankAccounts = new List<BankAccount>();
 
         private static List<Customer> AllCustomers = new List<Customer>();
+
+
+        public static BankAccount RegisterAccount(Customer customer, decimal initialDeposit, string accountType) =>
+            new BankAccount(customer, initialDeposit, accountType);
         public void MakeDeposite(BankAccount account, decimal amount, string note)
         {
             if (amount < 1)
                 throw new InvalidOperationException("You are trying to deposit an invalid amount");
+            if (account == null)
+                throw new NullReferenceException("Customer must have an account to make a deposit");
             AccountBalance += amount;
             BankTransactions transaction = new BankTransactions(account, amount, AccountBalance, note, DateTime.Now);
             AllTransactions.Add(transaction);
