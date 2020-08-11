@@ -40,20 +40,20 @@ namespace bankapp_refactored_week4.HelperClasses
                 Console.WriteLine("*  Please type in your valid login Id and Email to login or 'E' to exit  *");
                 Console.WriteLine("**************************************************************************");
                 Console.WriteLine("\t\t\tEnter your Email: ");
-                string customerEmail = Console.ReadLine();
+                string customerEmail = Console.ReadLine().ToLower();
                 if (customerEmail.ToLower() == "e")
                     goto Register;
                 Console.WriteLine("\t\t\tEnter your password: ");
-                string password = Console.ReadLine();
+                string password = Console.ReadLine().ToLower();
                 if (!Customer.customerExists(password, customerEmail))
                 {
                     Console.WriteLine("Please enter valid Details");
                     goto LoginDetails;
                 }
-                LoginDetails customerDetails = new LoginDetails(customerEmail, password);
-                //var customer = Customer.GetCurrentCustomer(customerDetails.Password, customerDetails.Email);
-                Customer currentCustomer = CustomerAuth.Login(customerDetails.Password, customerDetails.Email);
-                if (currentCustomer == null)
+                //LoginDetails customerDetails = new LoginDetails(customerEmail, password);
+                var customer = Customer.GetCurrentCustomer(password, customerEmail);
+                //Customer currentCustomer = CustomerAuth.Login(customerDetails.Password, customerDetails.Email);
+                if (customer == null)
                 {
                     Console.WriteLine("Wrong user Input");
                     goto LoginDetails;
@@ -113,14 +113,14 @@ namespace bankapp_refactored_week4.HelperClasses
                         goto InitialDeposit;
                     }
 
-                    BankAccount newAccount =  BankAccount.RegisterAccount(currentCustomer, initalDeposit, accountType);
+                    BankAccount newAccount =  BankAccount.RegisterAccount(customer, initalDeposit, accountType);
                     Console.WriteLine($"A {newAccount.AccountType} account has been created for {newAccount.CustomerName} with an initial deposite of {newAccount.AccountBalance}\n\t\tAccount number: {newAccount.AccountNumber}");
                     Console.WriteLine("Do you want to perform another transaction?");
                     goto ActionCenter;
                 }
                 else if (choice.ToLower() == "d")
                 {
-                    string nextAction = ProcessTransactions.ProcessDeposit(currentCustomer);
+                    string nextAction = ProcessTransactions.ProcessDeposit(customer);
                     if (nextAction == "e")
                         goto ActionCenter;
                 }
@@ -269,7 +269,7 @@ namespace bankapp_refactored_week4.HelperClasses
                 }
                 else if (choice.ToLower() == "e")
                 {
-                    CustomerAuth.Logout(currentCustomer);
+                    CustomerAuth.Logout(customer);
                     goto ActionCenter;
                 }
                 else
