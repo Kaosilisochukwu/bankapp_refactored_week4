@@ -10,11 +10,9 @@ namespace bankapp_refactored_week4.TestProjects
    
     public class LoginTest
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
+      
+        //ARRANGE 
+        //CREATED CUSTOMERS FOR TESTING CUSTOMER LOGIN
         Customer Kaosi = new Customer("Kaosi", "Nwizu", "Kaosi@maing.guy", "kaosi");
         Customer Deola = new Customer("Deola", "Idowu", "Idowu@maing.guy", "idowu");
 
@@ -22,13 +20,22 @@ namespace bankapp_refactored_week4.TestProjects
         [Test]
         public void WhenACustormerExistsAndIsLoggedIn()
         {
+            //ARRANGE
             var LoggedInCustomer = CustomerAuth.Login("Kaosi@maing.guy", "kaosi");
-            Assert.That(LoggedInCustomer.IsLoggedIn, Is.EqualTo(true));
+
+            //ACT
+            //CUSTOMER ATTEMPTS LOGGING IN
+            bool customerLoginStatus = LoggedInCustomer.IsLoggedIn;
+
+            //ASSERT REGISTERD CUSTOMER CAN LOG IN
+            Assert.That(customerLoginStatus, Is.EqualTo(true));
         }
 
         [Test]
         public void WhenLoginDetailsDontExistInDataBase()
         {
+            //ASSERT 
+            //NON-REGISERED CUSTOMERS CANNOT LOGIN
             Assert.Throws<NullReferenceException>(
                 () => CustomerAuth.Login("nodetails@non.com", "noPassword")
             );
@@ -36,6 +43,8 @@ namespace bankapp_refactored_week4.TestProjects
         [Test]
         public void WhenACustormerExistsButIsNotLoggedIn()
         {
+            //ASSERT
+            //A CUSTOMER CAN EXIST BUT NOT LOGGED IN
             Assert.That(Deola.IsLoggedIn, Is.EqualTo(false));
         }
     }
