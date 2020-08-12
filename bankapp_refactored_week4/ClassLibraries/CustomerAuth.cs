@@ -48,7 +48,7 @@ namespace bankapp_refactored_week4.ClassLibraries
 
         public static Customer Login(string email, string password)
         {
-            Customer cus = Customer.GetCurrentCustomer(password, email);
+            Customer cus = Customer.GetCurrentCustomer(email, password);
             if (cus == null)
                 throw new NullReferenceException("Invalid Login Details");
             cus.IsLoggedIn = true;

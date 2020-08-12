@@ -44,7 +44,7 @@ namespace bankapp_refactored_week4.ClassLibraries
         }
 
         //TO RETURN A REGISTERED CUSTOMERS
-        public static Customer GetCurrentCustomer(string password, string email)
+        public static Customer GetCurrentCustomer(string email, string password)
         {
             Customer currentCustomer = null;
             foreach (var customer in AllCustomers)
